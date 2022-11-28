@@ -16,7 +16,7 @@ def get(serverIP):
     cSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     cSocket.connect((serverIP, port))
     cSocket.setblocking(False)
-    time.sleep(0.2)
+    time.sleep(0.1)
     while 1:
         try:
             server_reply = cSocket.recv(BUF_SIZE)
@@ -26,9 +26,9 @@ def get(serverIP):
             break
         except BlockingIOError:
             pass
-        time.sleep(2)
         eel.writeMsg(5, '資料等待中')
         print("資料等待中")
+        time.sleep(2)
     cSocket.close()
 
 eel.start('Consumer.html', size=(500, 500),port=0)  # Start
